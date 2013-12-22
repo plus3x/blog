@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.order(:rating).reverse.first 10
   end
 
   # GET /posts/1
@@ -22,11 +22,16 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-
-    if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
-    else
-      render action: 'new'
+    
+    respond_to do |format|
+      if @post.save
+        flash[:notice] = 'Post was successfully created.' 
+        format.html { redirect_to @post }
+        format.js { render action: 'create' }
+      else
+        format.html { render action: 'new' }
+        format.js { render action: 'create', notice: 'Post was not created.' }
+      end
     end
   end
 
