@@ -1,0 +1,10 @@
+<%= cache post do %>
+  <li>
+    Title: <%= post.title %><br/>
+    Description: <p><%= post.description %></p>
+    Rating: <%= post.rating %><br/>
+    <%= link_to 'Show', post %> |
+    <%= link_to 'Edit', edit_post_path(post) %> |
+    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </li>
+<% end %>

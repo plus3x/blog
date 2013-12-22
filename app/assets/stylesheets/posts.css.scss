@@ -1,3 +1,28 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#new_post {
+  position: absolute;
+  background: #cfc;
+  top: 100px;
+  margin: 0 10%;
+  width: 400px;
+  height: 500px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+#posts {
+  margin-top: -20px;
+  padding: 30px 0px 0px 0px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  li {
+    list-style: none;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+  }
+}
