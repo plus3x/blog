@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @post.build_author
   end
 
   # GET /posts/1/edit
@@ -22,12 +23,14 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-    # @author = Author.find_by(name: post_params[:author])
-    # @post.author = Author.create(name: post_params[:author][:name], ip: request.env['REMOTE_ADDR'])
+    if author = Author.find_by(name: post_params[:author_attributes][:name])
+      @post.author = author
+    end
+    @post.author.ip = request.env['REMOTE_ADDR']
     
     respond_to do |format|
       if @post.save
-        flash[:notice] = 'Post was successfully created.'
+        flash[:notice] = 'Post has been successfully created.'
         format.html { redirect_to @post }
         format.js { render action: 'create' }
       else
