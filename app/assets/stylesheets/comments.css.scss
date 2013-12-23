@@ -3,12 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 div#new_comment {
-  position: absolute;
   background: #cfc;
-  top: 100px;
-  margin: 0 10%;
-  width: 400px;
-  height: 500px;
-  border: 2px solid black;
+  padding: 10px;
+  border: 1px solid black;
   border-radius: 10px;
+  h1 {
+    margin: 10px;
+  }
 }
