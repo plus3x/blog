@@ -1,7 +1,8 @@
 Blog::Application.routes.draw do
-  
+
   root to: 'posts#index', as: 'index'
   
+  resources :authors
   resources :categories
   resources :posts do
     resources :comments
