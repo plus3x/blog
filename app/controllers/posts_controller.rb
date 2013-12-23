@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
+    @post.author_ip = request.env['REMOTE_ADDR']
     
     respond_to do |format|
       if @post.save

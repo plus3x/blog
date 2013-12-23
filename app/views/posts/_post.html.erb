@@ -3,6 +3,7 @@
     Title: <%= post.title %><br/>
     Description: <p><%= post.description %></p>
     Rating: <%= post.rating %><br/>
+    Author ip: <%= post.author_ip %><br/>
     <%= link_to 'Show', post %> |
     <%= link_to 'Edit', edit_post_path(post) %> |
     <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
