@@ -6,6 +6,11 @@ Blog::Application.routes.draw do
   resources :posts do
     resources :comments
   end
+  
+  controller :posts do
+    get  'posts_search' => :search
+    post 'posts_search' => :find
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -51,6 +51,24 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to posts_url, notice: 'Post was successfully destroyed.'
   end
+  
+  # GET /posts_search
+  def search
+  end
+  
+  # POST /posts_find?rating_down=:rating_down&rating_up=:rating_up&date=:date
+  def find
+    @posts = Post.select do |post| 
+      (post.rating.to_i >= find_post_params[:rating_down].to_i) and 
+      (post.rating.to_i <= find_post_params[:rating_up].to_i)   and
+      (post.created_at.to_date == find_post_params[:date].to_date)
+    end
+    if @posts.empty?
+      flash[:notice] = 'Nothing!'
+    else
+      flash[:notice] = nil
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -61,5 +79,9 @@ class PostsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def post_params
       params.require(:post).permit(:title, :description, :rating)
+    end
+    
+    def find_post_params
+      params.require(:find_post).permit(:rating_down, :rating_up, :date)
     end
 end
