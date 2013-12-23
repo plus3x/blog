@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223120159) do
+ActiveRecord::Schema.define(version: 20131223141543) do
+
+  create_table "authors", force: true do |t|
+    t.string   "name"
+    t.string   "ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -36,10 +43,11 @@ ActiveRecord::Schema.define(version: 20131223120159) do
     t.float    "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "author_ip"
     t.integer  "category_id"
+    t.integer  "author_id"
   end
 
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id"
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
 
 end

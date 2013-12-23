@@ -22,7 +22,8 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-    @post.author_ip = request.env['REMOTE_ADDR']
+    # @author = Author.find_by(name: post_params[:author])
+    # @post.author = Author.create(name: post_params[:author][:name], ip: request.env['REMOTE_ADDR'])
     
     respond_to do |format|
       if @post.save
@@ -78,7 +79,7 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:title, :description, :rating, :category_id)
+      params.require(:post).permit(:title, :description, :category_id, author_attributes: [:name])
     end
     
     def find_post_params
