@@ -1,0 +1,3 @@
+$("#new_comment").replaceWith("<%=j link_to 'New Comment', new_post_comment_path(@post), remote: true, id: :new_comment %>");
+$("#notice").html("<%=j notice %>");
+$("#comments").html("<%=j render @post.comments %>");

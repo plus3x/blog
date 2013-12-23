@@ -1,6 +1,7 @@
-<%= cache post do %>
+<% cache post do %>
   <li>
     Title: <%= post.title %><br/>
+    Comments count: <%= post.comments.count %><br/>
     Description: <p><%= post.description %></p>
     Rating: <%= post.rating %><br/>
     Author ip: <%= post.author_ip %><br/>

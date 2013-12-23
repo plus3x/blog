@@ -6,14 +6,33 @@
 </p>
 
 <p>
+  <strong>Comments count:</strong>
+  <%= @post.comments.count %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @post.description %>
 </p>
 
-<p>
+<p id='post_rating'>
   <strong>Rating:</strong>
   <%= @post.rating %>
 </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<p>
+  <strong>Author IP:</strong>
+  <%= @post.author_ip %>
+</p>
+
+<strong>Comments:</strong>
+<% cache @post.comments do %>
+  <ul id='comments'>
+    <%= render @post.comments %>
+  </ul>
+<% end %>
+<%= link_to 'New comment', new_post_comment_path(@post), remote: true, id: :new_comment %>
+<br/>
+
+<%= link_to 'Edit post', edit_post_path(@post) %> |
+<%= link_to 'Back to posts', posts_path %>

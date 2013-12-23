@@ -1,36 +1,48 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  # GET /comments
+  # GET /post/:post_id/comments
   def index
     @comments = Comment.all
   end
 
-  # GET /comments/1
+  # GET /post/:post_id/comments/1
   def show
   end
 
-  # GET /comments/new
+  # GET /post/:post_id/comments/new
   def new
     @comment = Comment.new
+    @comment.post = Post.find_by(id: params[:post_id])
+    puts "Comment post: #{@comment.post}"
   end
 
-  # GET /comments/1/edit
+  # GET /post/:post_id/comments/1/edit
   def edit
   end
 
-  # POST /comments
+  # POST /post/:post_id/comments
   def create
     @comment = Comment.new(comment_params)
-
-    if @comment.save
-      redirect_to @comment, notice: 'Comment was successfully created.'
-    else
-      render action: 'new'
+    @post = Post.find_by(id: params[:post_id])
+    @comment.post = @post
+    puts "Comment post: #{@comment.post}"
+    @comment.author_ip = request.env['REMOTE_ADDR']
+    
+    respond_to do |format|
+      if @comment.save
+        flash[:notice] = 'Comment was successfully created.' 
+        format.html { redirect_to @comment }
+        format.js { render action: 'create' }
+      else
+        flash[:notice] = 'Comment was not created.' 
+        format.html { render action: 'new' }
+        format.js { render action: 'create' }
+      end
     end
   end
 
-  # PATCH/PUT /comments/1
+  # PATCH/PUT /post/:post_id/comments/1
   def update
     if @comment.update(comment_params)
       redirect_to @comment, notice: 'Comment was successfully updated.'
@@ -39,7 +51,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
+  # DELETE /post/:post_id/comments/1
   def destroy
     @comment.destroy
     redirect_to comments_url, notice: 'Comment was successfully destroyed.'

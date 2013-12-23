@@ -30,8 +30,9 @@ class PostsController < ApplicationController
         format.html { redirect_to @post }
         format.js { render action: 'create' }
       else
+        flash[:notice] = 'Post was not created.' 
         format.html { render action: 'new' }
-        format.js { render action: 'create', notice: 'Post was not created.' }
+        format.js { render action: 'create' }
       end
     end
   end

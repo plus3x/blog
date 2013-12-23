@@ -1,0 +1,10 @@
+<% cache comment do %>
+  <li>
+    Description: <p><%= comment.description %></p>
+    Rating: <%= comment.rating %><br/>
+    Author ip: <%= comment.author_ip %><br/>
+    <%= link_to 'Show', [comment.post, comment] %> |
+    <%= link_to 'Edit', edit_post_comment_path(comment.post, comment) %> |
+    <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+  </li>
+<% end %>
