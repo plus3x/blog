@@ -17,12 +17,10 @@
       <div id="side">
         <ul>
           <li><%= link_to_unless_current 'Home', index_path %></li>
+          <li><%= link_to_unless_current 'Categories', categories_path %></li>
         </ul>
       </div>
-      <div id="main"> 
-        <% if notice %>
-          <p id="notice"><%= notice %></p>
-        <% end %>
+      <div id="main">
     
         <%= yield %>
     
