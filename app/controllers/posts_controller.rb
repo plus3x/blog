@@ -26,11 +26,11 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       if @post.save
-        flash[:notice] = 'Post was successfully created.' 
+        flash[:notice] = 'Post was successfully created.'
         format.html { redirect_to @post }
         format.js { render action: 'create' }
       else
-        flash[:notice] = 'Post was not created.' 
+        flash[:notice] = 'Post was not created.'
         format.html { render action: 'new' }
         format.js { render action: 'create' }
       end
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:title, :description, :rating)
+      params.require(:post).permit(:title, :description, :rating, :category_id)
     end
     
     def find_post_params
