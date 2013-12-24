@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Category.destroy_all
+Category.delete_all
 categories = [
   {name: 'Apples'},
   {name: 'Books'},
@@ -22,21 +22,49 @@ Category.create(categories).each do |category|
   end
 end
 
-Post.destroy_all
-posts = []
-(1_000_000..2_000_000).to_a.sample.times { |e|
-  posts << {
-    title: ['Apple', 'Books', 'Tables', 'Names'].sample,
-    description: ['Good choose', 'Nice name', 'Simple fruit', 'Good for learning'].sample,
-    category: Category.all.sample
-  }
-}
-puts "Default posts: "
-Post.create(posts).each do |post|
-  if post.save
-    print "*"
+Author.delete_all
+author_names = ['Garry', 'Harry', 'Barry', 'Marry', 'Dilly', 'Billy', 'Molly']
+authors = []
+author_names.each { |author_name| authors << {name: author_name, ip: "#{rand(255)}.#{rand(255)}.#{rand(255)}.#{rand(255)}"} }
+puts "Default authors: "
+Author.create(authors).each do |author|
+  if author.save
+    puts "#{author.id} - #{author.name} - #{author.ip}"
   else
-    puts '>>> Post not created!'
+    puts '>>> Author not created!'
   end
 end
-puts ''
+
+Post.delete_all
+puts "Default posts: "
+rand(1_000..2_000).times do
+  post = Post.create({
+          title: ['Apple', 'Books', 'Tables', 'Names'].sample,
+          description: ['Good choose', 'Nice name', 'Simple fruit', 'Good for learning'].sample,
+          category: Category.all.sample,
+          author: Author.all.sample,
+          created_at: rand(1.year.ago..Time.now) })
+  puts '>>> Post not created!' unless post.save
+end
+puts "#{Post.count} posts created!"
+
+Comment.delete_all
+puts "Default comments: "
+rand(2_000..4_000).times do
+  comment = Comment.create({
+                post: Post.all.sample,
+                description: ('a'..'z').to_a.shuffle.first(rand(40..100)).join,
+                rating: rand(1..5),
+                author: Author.all.sample,
+                created_at: rand(1.year.ago..Time.now) })
+  puts '>>> Comment not created!' unless comment.save
+end
+puts "#{Comment.count} comments created!"
+
+puts "Set rating to posts: "
+Post.all.each do |post|
+  post.rating = 1
+  post.rating = post.comments.map(&:rating).sum.to_f / post.comments.count) unless post.comments.empty?
+  puts '>>> Rating not saved!' unless post.save
+end
+puts "All #{Post.count} post rating saved!"
