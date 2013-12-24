@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     @comment.post = Post.find_by(id: params[:post_id])
-    puts "Comment post: #{@comment.post}"
+    @comment.build_author
   end
 
   # GET /post/:post_id/comments/1/edit
@@ -26,16 +26,18 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @post = Post.find_by(id: params[:post_id])
     @comment.post = @post
-    puts "Comment post: #{@comment.post}"
+    if author = Author.find_by(name: comment_params[:author_attributes][:name])
+      @comment.author = author
+    end
     @comment.author_ip = request.env['REMOTE_ADDR']
     
     respond_to do |format|
       if @comment.save
-        flash[:notice] = 'Comment was successfully created.' 
+        flash[:notice] = 'Comment was successfully created.'
         format.html { redirect_to @comment }
         format.js { render action: 'create' }
       else
-        flash[:notice] = 'Comment was not created.' 
+        flash[:notice] = 'Comment was not created.'
         format.html { render action: 'new' }
         format.js { render action: 'create' }
       end
@@ -65,6 +67,6 @@ class CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.require(:comment).permit(:description, :author_ip, :post_id)
+      params.require(:comment).permit(:description, :rating, author_attributes: [:name])
     end
 end

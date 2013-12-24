@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223141543) do
+ActiveRecord::Schema.define(version: 20131224000510) do
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 20131223141543) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rating"
+    t.integer  "author_id"
   end
 
+  add_index "comments", ["author_id"], name: "index_comments_on_author_id"
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
 
   create_table "posts", force: true do |t|

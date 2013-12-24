@@ -8,8 +8,6 @@
     Author name: <%= post.author.name %><br/>
     Author ip: <%= post.author.ip %><br/>
     Created at: <%= post.created_at.to_date %><br/>
-    <%= link_to 'Show', post %> |
-    <%= link_to 'Edit', edit_post_path(post) %> |
-    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Show', post %>
   </li>
 <% end %>
