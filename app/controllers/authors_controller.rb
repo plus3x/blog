@@ -44,6 +44,15 @@ class AuthorsController < ApplicationController
     @author.destroy
     redirect_to authors_url, notice: 'Author was successfully destroyed.'
   end
+  
+  # GET /group_author_by_ip
+  def group_author_by_ip
+    @groups = []
+    Author.all.each_with_index do |group, i|
+      @groups[i] = []
+      @groups[i] << Author.where(ip: group.ip)
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,0 +1,12 @@
+<h1>Authors grouped by ip</h1>
+
+<% @groups.each do |group| %>
+  <% group.each do |author| %>
+    <h3><%= author.first.ip %></h3>
+    <% author.each do |same_ip_author| %>
+      <ul>
+        <li><%= same_ip_author.name %></li>
+      </ul>
+    <% end %>
+  <% end %>
+<% end %>

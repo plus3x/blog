@@ -12,7 +12,11 @@ Blog::Application.routes.draw do
     get  'posts_search' => :search
     post 'posts_search' => :find
   end
-
+  
+  controller :authors do
+    get  'group_author_by_ip' => :group_author_by_ip
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
