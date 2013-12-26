@@ -46,4 +46,9 @@ class PostsControllerTest < ActionController::TestCase
 
     assert_redirected_to posts_path
   end
+  
+  test "should get search" do
+    get :search
+    assert_response :success
+  end
 end
