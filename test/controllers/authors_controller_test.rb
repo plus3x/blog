@@ -46,4 +46,11 @@ class AuthorsControllerTest < ActionController::TestCase
 
     assert_redirected_to authors_path
   end
+  
+  test "should get group author by ip" do
+    get :group_author_by_ip
+    assert_response :success
+    groups = {"IP" => Author.where(ip: "IP")}
+    assert assigns(:groups) == groups, "Can't get ip groups"
+  end
 end
