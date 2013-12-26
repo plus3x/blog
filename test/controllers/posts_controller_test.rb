@@ -51,4 +51,9 @@ class PostsControllerTest < ActionController::TestCase
     get :search
     assert_response :success
   end
+  
+  test "should find posts" do
+    xhr :post, :find, find_post: {rating_from: @post.rating - 1, rating_to: @post.rating + 1, date: @post.created_at.to_date.to_s}
+    assert_equal assigns(:posts).first, @post
+  end
 end
