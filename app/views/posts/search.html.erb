@@ -3,8 +3,8 @@
     <fieldset>
       <legend>Search</legend>
       <div>
-        Rating down: <%= f.select :rating_down, options_for_select((1..5).step(0.5)) %>
-                 up: <%= f.select :rating_up,   options_for_select((1..5).step(0.5)) %>
+        Rating from: <%= f.select :rating_from, options_for_select((1..5).step(0.5)) %>
+                 to: <%= f.select :rating_to,   options_for_select((1..5).step(0.5)) %>
       </div>
       <div>
         Date: <%= f.date_field :date, placeholder: '23.12.2013' %>
@@ -15,6 +15,5 @@
     </fieldset> 
   <% end %>
 </div>
-<p id="notice"><%= notice %></p>
 <div id='posts'>
 </div>

@@ -3,7 +3,8 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.order(:rating).reverse.first 10
+    @posts = Post.order(:rating).reverse_order.take 10
+    fresh_when @posts
   end
 
   # GET /posts/1
@@ -62,11 +63,11 @@ class PostsController < ApplicationController
   
   # POST /posts_find?rating_down=:rating_down&rating_up=:rating_up&date=:date
   def find
-    @posts = Post.select do |post| 
-      (post.rating.to_i >= find_post_params[:rating_down].to_i) and 
-      (post.rating.to_i <= find_post_params[:rating_up].to_i)   and
-      (post.created_at.to_date == find_post_params[:date].to_date)
-    end
+    @posts = Post.where("(rating BETWEEN ? AND ?) AND (created_at BETWEEN ? AND ?)",
+                find_post_params[:rating_from],
+                find_post_params[:rating_to],
+                find_post_params[:date].to_date.beginning_of_day,
+                find_post_params[:date].to_date.end_of_day)
     if @posts.empty?
       flash[:notice] = 'Nothing!'
     else
@@ -86,6 +87,6 @@ class PostsController < ApplicationController
     end
     
     def find_post_params
-      params.require(:find_post).permit(:rating_down, :rating_up, :date)
+      params.require(:find_post).permit(:rating_from, :rating_to, :date)
     end
 end

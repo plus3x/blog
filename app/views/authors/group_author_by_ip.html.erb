@@ -1,12 +1,14 @@
 <h1>Authors grouped by ip</h1>
 
-<% @groups.each do |group| %>
-  <% group.each do |author| %>
-    <h3><%= author.first.ip %></h3>
-    <% author.each do |same_ip_author| %>
-      <ul>
-        <li><%= same_ip_author.name %></li>
-      </ul>
-    <% end %>
+<% begin %>
+  <% @groups.each_key do |group| %>
+    <h3><%= group %>:</h3>
+    <ul id="authors">
+      <% @groups[group].each do |author| %>
+        <li><%= link_to author.name, author %></li>
+      <% end %>
+    </ul>
   <% end %>
+<% rescue %>
+  <h3>No have groups!</h3>
 <% end %>

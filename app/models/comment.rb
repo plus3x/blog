@@ -4,7 +4,11 @@ class Comment < ActiveRecord::Base
   accepts_nested_attributes_for :author
   
   after_validation on: :create do
-    self.post.rating = post.comments.map(&:rating).sum.to_f / (post.comments.count + 1)
+    if post.rating
+      self.post.rating = (post.rating * post.comments.count + rating) / (post.comments.count + 1)
+    else
+      self.post.rating = rating
+    end
     self.post.save
   end
   
