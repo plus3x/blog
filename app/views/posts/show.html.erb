@@ -7,7 +7,7 @@
 
 <p>
   <strong>Comments count:</strong>
-  <%= @post.comments.count %>
+  <%= @post.comments.count rescue 0 %>
 </p>
 
 <p>

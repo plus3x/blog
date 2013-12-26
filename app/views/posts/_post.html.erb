@@ -1,7 +1,7 @@
 <% cache post do %>
   <li>
     Title: <%= post.title %><br/>
-    Comments count: <%= post.comments.count %><br/>
+    Comments count: <%= post.comments.count rescue 0 %><br/>
     Description: <p><%= post.description %></p>
     Category: <%= post.category.name %><br/>
     Rating: <%= sprintf('%.2f', post.rating) %><br/>
