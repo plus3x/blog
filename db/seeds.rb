@@ -37,7 +37,7 @@ end
 
 Post.delete_all
 puts "Default posts: "
-rand(100..200).times do
+rand(1_000..2_000).times do
   post = Post.create({
           title: ['Apple', 'Books', 'Tables', 'Names'].sample,
           description: ['Good choose', 'Nice name', 'Simple fruit', 'Good for learning'].sample,
@@ -50,7 +50,7 @@ puts "#{Post.count} posts created!"
 
 Comment.delete_all
 puts "Default comments: "
-rand(200..400).times do
+rand(2_000..4_000).times do
   comment = Comment.create({
                 post: Post.all.sample,
                 description: ('a'..'z').to_a.shuffle.first(rand(40..100)).join,
