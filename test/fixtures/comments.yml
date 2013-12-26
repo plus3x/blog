@@ -2,10 +2,12 @@
 
 one:
   description: MyText
-  author_ip: MyString
-  post_id: 
+  rating: 4
+  author: one
+  post: one
 
 two:
   description: MyText
-  author_ip: MyString
-  post_id: 
+  rating: 4
+  author: two
+  post: two 

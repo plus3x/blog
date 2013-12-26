@@ -2,8 +2,12 @@
 
 one:
   name: MyString
-  ip: MyString
+  ip: "IP"
 
 two:
   name: MyString
-  ip: MyString
+  ip: "IP"
+  
+three:
+  name: MyString
+  ip: "Another IP"

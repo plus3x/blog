@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         flash[:notice] = 'Comment was successfully created.'
-        format.html { redirect_to @comment }
+        format.html { redirect_to [@post, @comment] }
         format.js { render action: 'create' }
       else
         flash[:notice] = 'Comment was not created.'
@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /post/:post_id/comments/1
   def update
     if @comment.update(comment_params)
-      redirect_to @comment, notice: 'Comment was successfully updated.'
+      redirect_to [@comment.post, @comment], notice: 'Comment was successfully updated.'
     else
       render action: 'edit'
     end
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
   # DELETE /post/:post_id/comments/1
   def destroy
     @comment.destroy
-    redirect_to comments_url, notice: 'Comment was successfully destroyed.'
+    redirect_to posts_url, notice: 'Comment was successfully destroyed.'
   end
 
   private

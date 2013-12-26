@@ -4,8 +4,12 @@ one:
   title: MyString
   description: MyText
   rating: 1.5
+  category: one
+  author: one
 
 two:
   title: MyString
   description: MyText
-  rating: 1.5
+  rating: 2.5
+  category: two
+  author: two
