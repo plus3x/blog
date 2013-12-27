@@ -47,7 +47,7 @@ class AuthorsController < ApplicationController
   
   # GET /group_author_by_ip
   def group_author_by_ip
-    recurring_ips = Author.select("ip, count(*) as cnt").group(:ip).having("cnt > 1").map(&:ip)
+    recurring_ips = Author.select("ip, count(*)").group(:ip).having("count(*) > 1").map(&:ip)
     @groups = {}
     recurring_ips.each { |ip| @groups[ip] = Author.where(ip: ip) }
   end
