@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/plus3x/jquery-rails.git
+  revision: 72231fb2ec328ec6bdd92944ff174fab76c2abac
+  branch: Fix-bug-with-assert
+  specs:
+    jquery-rails (3.0.4)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -52,9 +61,6 @@ GEM
       excon (~> 0.25.1)
     hike (1.2.3)
     i18n (0.6.9)
-    jquery-rails (3.0.4)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
     json (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -143,7 +149,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   heroku
-  jquery-rails
+  jquery-rails!
   pg
   pry-rails
   rails (= 4.1.0.beta1)

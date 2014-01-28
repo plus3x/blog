@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131226153835) do
+ActiveRecord::Schema.define(version: 20140128195122) do
 
   create_table "authors", force: true do |t|
     t.string   "name"
@@ -53,6 +53,6 @@ ActiveRecord::Schema.define(version: 20131226153835) do
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
-  add_index "posts", ["rating"], name: "index_posts_on_rating"
+  add_index "posts", ["rating", "created_at"], name: "index_posts_on_rating_and_created_at"
 
 end
